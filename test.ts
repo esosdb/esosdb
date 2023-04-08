@@ -8,6 +8,6 @@ db.set("module.name", "esosdb", (data: any) => {
   console.log(data);
 });
 
-db.set("module.version", "2.0.0", (data: any) => {
+db.set("module.version", "2.0.1", (data: any) => {
   console.log(data);
 });

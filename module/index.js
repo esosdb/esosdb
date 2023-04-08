@@ -2,6 +2,7 @@ const { setData } = require("./functions/set");
 const fs = require("fs");
 const { getData } = require("./functions/get");
 const { deleteData } = require("./functions/delete");
+const { normalize, dirname } = require("path");
 class DataBase {
   dbPath;
   logtoconsole;
@@ -10,9 +11,23 @@ class DataBase {
   constructor(props = { path: String, space: Number }) {
     this.dbPath = props.path || "./esosdb/db.json";
     this.readable = props.space || 0;
-    if (fs.existsSync(this.dbPath) === false) {
-      fs.writeFileSync(this.dbPath, "{}");
-      return;
+    const normalizedPath = normalize(this.dbPath);
+    if (!fs.existsSync(normalizedPath)) {
+      const dirPath = dirname(normalizedPath);
+
+      fs.mkdir(dirPath, { recursive: true }, (err) => {
+        if (err) {
+          console.log(err);
+        } else {
+          fs.writeFile(normalizedPath, "{}", (err) => {
+            if (err) {
+              console.log(err);
+            } else {
+              console.log("Database is setted");
+            }
+          });
+        }
+      });
     }
   }
   set(dataPath, newValue, callbacks) {
