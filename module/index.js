@@ -3,6 +3,7 @@ const fs = require("fs");
 const { getData } = require("./functions/get");
 const { deleteData } = require("./functions/delete");
 const { normalize, dirname } = require("path");
+const { load } = require("./functions/load");
 class DataBase {
   dbPath;
   logtoconsole;
@@ -30,7 +31,7 @@ class DataBase {
       });
     }
   }
-  set(dataPath, newValue, callbacks) {
+  set(dataPath, newValue, callbacks = () => {}) {
     var allData = fs.readFileSync(`./${this.dbPath}`, "utf-8");
     return callbacks(
       setData(
@@ -53,9 +54,9 @@ class DataBase {
     );
   }
   getAll() {
-    return load(`./${this.dbPath}`);
+    return load(`./${this.dbPath}`)
   }
-  deleteAll(callbacks) {
+  deleteAll(callbacks = () => {}) {
     try {
       fs.writeFileSync(`./${this.dbPath}`, "{}");
       if (this.logtoconsole) {
@@ -66,7 +67,7 @@ class DataBase {
       console.log(err);
     }
   }
-  push(dataPath, element, callbacks) {
+  push(dataPath, element, callbacks = () => {}) {
     var allData = fs.readFileSync(`./${this.dbPath}`, "utf-8");
     let newArray = [];
     if (Array.isArray(getData(dataPath, `./${this.dbPath}`))) {
@@ -85,7 +86,7 @@ class DataBase {
       )
     );
   }
-  unpush(dataPath, element, callbacks) {
+  unpush(dataPath, element, callbacks = () => {}) {
     var allData = fs.readFileSync(`./${this.dbPath}`, "utf-8");
     let newArray = [];
     if (Array.isArray(getData(dataPath, `./${this.dbPath}`))) {
