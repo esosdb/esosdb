@@ -9,6 +9,12 @@ Little database for you as local.(You can create big database)
 - [About](#about)
 - [Example Uses](#examples)
   - [set()](#set)
+  - [get()](#get)
+  - [delete()](#delete)
+  - [push()](#push)
+  - [unpush()](#unpush)
+  - [getAll()](#getAll)
+  - [deleteAll()](#deleteAll)
 
 ## About
 
