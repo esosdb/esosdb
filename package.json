@@ -1,0 +1,24 @@
+{
+  "name": "esosdb",
+  "version": "2.0.0",
+  "description": "Little database for you as local.(You can create big database)",
+  "main": "./module/index.js",
+  "types": "./module/index.d.ts",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ramazaneris/esosdb.git"
+  },
+  "keywords": [
+    "database",
+    "esosdb",
+    "db"
+  ],
+  "author": "",
+  "license": "MIT",
+  "devDependencies": {
+    "@types/node": "^17.0.12"
+  }
+}
