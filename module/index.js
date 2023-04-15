@@ -15,20 +15,16 @@ class DataBase {
     const normalizedPath = normalize(this.dbPath);
     if (!fs.existsSync(normalizedPath)) {
       const dirPath = dirname(normalizedPath);
-
-      fs.mkdir(dirPath, { recursive: true }, (err) => {
-        if (err) {
-          console.log(err);
-        } else {
-          fs.writeFile(normalizedPath, "{}", (err) => {
-            if (err) {
-              console.log(err);
-            } else {
-              console.log("Database is setted");
-            }
-          });
+      try {
+        fs.mkdirSync(dirPath, { recursive: true });
+        try {
+          fs.writeFileSync(normalizedPath, "{}", "utf-8");
+        } catch (e) {
+          console.log(e);
         }
-      });
+      } catch (err) {
+        console.log(err);
+      }
     }
   }
   set(dataPath, newValue, callbacks = () => {}) {
@@ -54,7 +50,7 @@ class DataBase {
     );
   }
   getAll() {
-    return load(`./${this.dbPath}`)
+    return load(`./${this.dbPath}`);
   }
   deleteAll(callbacks = () => {}) {
     try {
