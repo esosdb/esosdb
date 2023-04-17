@@ -1,7 +1,8 @@
 const fs = require("fs");
-function deleteData(path, allData, filePath, readable) {
+const { load } = require("./load");
+function deleteData(path, filePath, readable) {
   const pathArray = path.split(".");
-  let obj = allData;
+  let obj = load(filePath);
 
   let target = obj;
   for (let i = 0; i < pathArray.length - 1; i++) {
@@ -19,15 +20,12 @@ function deleteData(path, allData, filePath, readable) {
 
   delete target[lastKey];
 
-  fs.writeFileSync(filePath, JSON.stringify(obj, null, readable), (err) => {
-    if (err) {
-      console.log(err);
-    } else {
-      console.log("Saved to database");
-    }
-  });
-
-  return target;
+  try {
+    fs.writeFileSync(filePath, JSON.stringify(obj, null, readable));
+    return target;
+  } catch (e) {
+    console.error(e.message);
+  }
 }
 
 module.exports = { deleteData };

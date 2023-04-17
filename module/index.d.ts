@@ -1,5 +1,5 @@
 declare class DataBase {
-  constructor<Props>({
+  constructor<DataBase>({
     path: string = "./esosdb/db.json",
     space: number = 0,
   } = {});
@@ -12,7 +12,7 @@ declare class DataBase {
   unpush(path: string, element: any, callbacks?: (data: any) => any): any;
 }
 
-interface Props {
+declare interface DataBase {
   path: string;
   space: number;
 }

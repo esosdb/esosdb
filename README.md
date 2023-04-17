@@ -56,7 +56,7 @@ const db = new DataBase({
 
 - Set any variable to database
 
-> db.set(path,value,callback)
+`db.set(path,value,callback)`
 
 ```js
 db.set("main", {}, (callback) => {
@@ -67,8 +67,8 @@ db.set("main.name", "esosdb", (callback) => {
   console.log(callback); // logs the {name:"esosdb"}
 });
 
-db.set("main.version", "2.0.0", (callback) => {
-  console.log(callback); // logs the {name:"esosdb",version:"2.0.0"}
+db.set("main.version", "2.1.0", (callback) => {
+  console.log(callback); // logs the {name:"esosdb",version:"2.1.0"}
 });
 ```
 
@@ -76,7 +76,7 @@ db.set("main.version", "2.0.0", (callback) => {
 
 - Get data from database
 
-> db.get(path)
+`db.get(path)`
 
 Do not have a callback, just use the return data
 
@@ -88,7 +88,7 @@ console.log(db.get("main.name")); //logs the "esosdb"
 
 - Delete data from database
 
-> db.delete(path,callback)
+`db.delete(path,callback)`
 
 ```js
 db.delete("main.version", (callback) => {
@@ -100,7 +100,7 @@ db.delete("main.version", (callback) => {
 
 - Push an element to array
 
-> db.push(path,element,callback)
+`db.push(path,element,callback)`
 
 ```js
 db.push("main.dependencies", "fs", (callback) => {
@@ -112,7 +112,7 @@ db.push("main.dependencies", "fs", (callback) => {
 
 - Unpush an element from array
 
-> db.unpush(path,element,callback)
+`db.unpush(path,element,callback)`
 
 ```js
 db.unpush("main.dependencies", "fs", (callback) => {
@@ -124,7 +124,7 @@ db.unpush("main.dependencies", "fs", (callback) => {
 
 - get all data from database
 
-> db.getAll()
+`db.getAll()`
 
 Do not have a callback, just use the return data
 
@@ -136,7 +136,7 @@ console.log(db.getAll()); // logs the {main:{name:"esos"}}
 
 - delete all data from database
 
-> db.deleteAll(callback)
+`db.deleteAll(callback)`
 
 ```js
 db.deleteAll((callback) => {

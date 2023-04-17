@@ -1,5 +1,7 @@
 const fs = require("fs");
-function setData(filePath, path, value, allData, readable) {
+const { load } = require("./load");
+function setData(filePath, path, value, readable) {
+  let allData = load(filePath);
   let target = allData;
   var pathArray = path.split(".");
   for (let i = 0; i < pathArray.length - 1; i++) {
@@ -10,14 +12,13 @@ function setData(filePath, path, value, allData, readable) {
     target = target[key];
   }
   target[pathArray[pathArray.length - 1]] = value;
-  fs.writeFileSync(filePath, JSON.stringify(allData, null, readable), (err) => {
-    if (err) {
-      console.log(err);
-    } else {
-      console.log("Saved to database");
-    }
-  });
-  return target;
+
+  try {
+    fs.writeFileSync(filePath, JSON.stringify(allData, null, readable));
+    return target;
+  } catch (e) {
+    console.error(e);
+  }
 }
 
 module.exports = { setData };

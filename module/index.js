@@ -6,12 +6,12 @@ const { normalize, dirname } = require("path");
 const { load } = require("./functions/load");
 class DataBase {
   dbPath;
-  logtoconsole;
-  allData;
-  readable;
-  constructor(props = { path: String, space: Number }) {
+  space;
+  constructor(
+    props = { path: (String = "./esosdb/db.json"), space: (Number = 0) }
+  ) {
     this.dbPath = props.path || "./esosdb/db.json";
-    this.readable = props.space || 0;
+    this.space = props.space || 0;
     const normalizedPath = normalize(this.dbPath);
     if (!fs.existsSync(normalizedPath)) {
       const dirPath = dirname(normalizedPath);
@@ -28,26 +28,13 @@ class DataBase {
     }
   }
   set(dataPath, newValue, callbacks = () => {}) {
-    var allData = fs.readFileSync(`./${this.dbPath}`, "utf-8");
-    return callbacks(
-      setData(
-        this.dbPath,
-        dataPath,
-        newValue,
-        JSON.parse(allData),
-        this.readable
-      )
-    );
+    return callbacks(setData(this.dbPath, dataPath, newValue, this.space));
   }
   get(dataPath) {
-    var allData = fs.readFileSync(`./${this.dbPath}`, "utf-8");
     return getData(dataPath, `./${this.dbPath}`);
   }
   delete(dataPath, callbacks) {
-    var allData = fs.readFileSync(`./${this.dbPath}`, "utf-8");
-    return callbacks(
-      deleteData(dataPath, JSON.parse(allData), this.dbPath, this.readable)
-    );
+    return callbacks(deleteData(dataPath, this.dbPath, this.space));
   }
   getAll() {
     return load(`./${this.dbPath}`);
@@ -64,7 +51,6 @@ class DataBase {
     }
   }
   push(dataPath, element, callbacks = () => {}) {
-    var allData = fs.readFileSync(`./${this.dbPath}`, "utf-8");
     let newArray = [];
     if (Array.isArray(getData(dataPath, `./${this.dbPath}`))) {
       newArray = getData(dataPath, `./${this.dbPath}`);
@@ -72,32 +58,15 @@ class DataBase {
       newArray = [];
     }
     newArray.push(element);
-    return callbacks(
-      setData(
-        this.dbPath,
-        dataPath,
-        newArray,
-        JSON.parse(allData),
-        this.readable
-      )
-    );
+    return callbacks(setData(this.dbPath, dataPath, newArray, this.space));
   }
   unpush(dataPath, element, callbacks = () => {}) {
-    var allData = fs.readFileSync(`./${this.dbPath}`, "utf-8");
     let newArray = [];
     if (Array.isArray(getData(dataPath, `./${this.dbPath}`))) {
       newArray = getData(dataPath, `./${this.dbPath}`);
     }
     newArray = newArray.filter((value) => value !== element);
-    return callbacks(
-      setData(
-        this.dbPath,
-        dataPath,
-        newArray,
-        JSON.parse(allData),
-        this.readable
-      )
-    );
+    return callbacks(setData(this.dbPath, dataPath, newArray, this.space));
   }
 }
 
