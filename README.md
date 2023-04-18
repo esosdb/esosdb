@@ -16,10 +16,6 @@ Little database for you as local.(You can create big database)
   - [getAll()](#getAll)
   - [deleteAll()](#deleteAll)
 
-## About
-
-Simple toolkit for revolt.js
-
 ## Badges
 
 [![NPM Downloads](https://img.shields.io/npm/dt/esosdb.svg?style=flat-square)](https://www.npmjs.com/package/esosdb)
