@@ -1,9 +1,9 @@
 {
   "name": "esosdb",
-  "version": "2.1.1",
+  "version": "2.1.2",
   "description": "Little database for you as local.(You can create big database)",
-  "main": "./module/index.js",
-  "types": "./module/index.d.ts",
+  "main": "./src/index.js",
+  "types": "./src/index.d.ts",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
