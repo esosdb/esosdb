@@ -33,7 +33,7 @@ class DataBase {
   get(dataPath) {
     return getData(dataPath, `./${this.dbPath}`);
   }
-  delete(dataPath, callbacks) {
+  delete(dataPath, callbacks = () => {}) {
     return callbacks(deleteData(dataPath, this.dbPath, this.space));
   }
   getAll() {

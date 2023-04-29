@@ -1,6 +1,6 @@
 {
   "name": "esosdb",
-  "version": "2.1.2",
+  "version": "2.1.21",
   "description": "Little database for you as local.(You can create big database)",
   "main": "./src/index.js",
   "types": "./src/index.d.ts",
