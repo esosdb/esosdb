@@ -1,13 +1,14 @@
 {
   "name": "esosdb",
-  "version": "2.1.21",
-  "description": "Little database for you as local.(You can create big database)",
+  "version": "2.1.3",
+  "description": "You can easily create a database locally",
   "main": "./src/index.js",
   "types": "./src/index.d.ts",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": "git+https://github.com/ramazaneris/esosdb.git",
+  "homepage": "https://esosdb.mbps.tk/",
   "keywords": [
     "database",
     "esosdb",

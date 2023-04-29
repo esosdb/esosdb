@@ -4,7 +4,7 @@ const { getData } = require("./functions/get");
 const { deleteData } = require("./functions/delete");
 const { normalize, dirname } = require("path");
 const { load } = require("./functions/load");
-class DataBase {
+class Database {
   dbPath;
   space;
   constructor(
@@ -70,4 +70,4 @@ class DataBase {
   }
 }
 
-module.exports = { DataBase };
+module.exports = { Database };

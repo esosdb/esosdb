@@ -1,5 +1,5 @@
-declare class DataBase {
-  constructor<DataBase>({
+declare class Database {
+  constructor<Database>({
     path: string = "./esosdb/db.json",
     space: number = 0,
   } = {});
@@ -12,9 +12,9 @@ declare class DataBase {
   unpush(path: string, element: any, callbacks?: (data: any) => any): any;
 }
 
-declare interface DataBase {
+declare interface Database {
   path: string;
   space: number;
 }
 
-export { DataBase };
+export { Database };

@@ -2,19 +2,9 @@
 
 ## Description
 
-Little database for you as local.(You can create big database)
+You can easily create a database locally.
 
-## Table of contents
-
-- [About](#about)
-- [Example Uses](#examples)
-  - [set()](#set)
-  - [get()](#get)
-  - [delete()](#delete)
-  - [push()](#push)
-  - [unpush()](#unpush)
-  - [getAll()](#getAll)
-  - [deleteAll()](#deleteAll)
+Do you want more detail? Check [Docs](https://esosdb.mbps.tk/)
 
 ## Badges
 
@@ -29,30 +19,26 @@ Little database for you as local.(You can create big database)
 CommonJS
 
 ```js
-const { DataBase } = require("esosdb");
-const db = new DataBase({
+const { Database } = require("esosdb");
+const db = new Database({
   path: "./esosdb/db.json", // this is default, can write the what you want
-  space: 2, //shold be a number (default:0)
+  space: 2, //should be a number (default:0)
 });
 ```
 
 EsModule
 
 ```js
-import { DataBase } from "esosdb";
-const db = new DataBase({
+import { Database } from "esosdb";
+const db = new Database({
   path: "./esosdb/db.json", // this is default, can write the what you want
-  space: 2, //shold be a number (default:0)
+  space: 2, //should be a number (default:0)
 });
 ```
 
 ## Examples
 
 ### set
-
-- Set any variable to database
-
-`db.set(path,value,callback)`
 
 ```js
 db.set("main", {}, (callback) => {
@@ -70,21 +56,11 @@ db.set("main.version", "2.1.0", (callback) => {
 
 ### get
 
-- Get data from database
-
-`db.get(path)`
-
-Do not have a callback, just use the return data
-
 ```js
 console.log(db.get("main.name")); //logs the "esosdb"
 ```
 
 ### delete
-
-- Delete data from database
-
-`db.delete(path,callback)`
 
 ```js
 db.delete("main.version", (callback) => {
@@ -94,10 +70,6 @@ db.delete("main.version", (callback) => {
 
 ### push
 
-- Push an element to array
-
-`db.push(path,element,callback)`
-
 ```js
 db.push("main.dependencies", "fs", (callback) => {
   console.log(callback); // logs the {name:"esosdb",dependencies:["fs"]}
@@ -105,10 +77,6 @@ db.push("main.dependencies", "fs", (callback) => {
 ```
 
 ### unpush
-
-- Unpush an element from array
-
-`db.unpush(path,element,callback)`
 
 ```js
 db.unpush("main.dependencies", "fs", (callback) => {
@@ -118,25 +86,16 @@ db.unpush("main.dependencies", "fs", (callback) => {
 
 ### getAll
 
-- get all data from database
-
-`db.getAll()`
-
-Do not have a callback, just use the return data
-
 ```js
 console.log(db.getAll()); // logs the {main:{name:"esos"}}
 ```
 
 ### deleteAll
 
-- delete all data from database
-
-`db.deleteAll(callback)`
-
 ```js
 db.deleteAll((callback) => {
-  console.log(callback)// logs the {}
-})
+  console.log(callback); // logs the {}
+});
 ```
+
 ### esosdb
