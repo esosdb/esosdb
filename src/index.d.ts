@@ -13,8 +13,8 @@ declare class Database {
 }
 
 declare interface Database {
-  path: string;
-  space: number;
+  path?: string;
+  space?: number;
 }
 
 export { Database };
