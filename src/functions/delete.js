@@ -1,5 +1,6 @@
 const fs = require("fs");
 const { load } = require("./load");
+const { resolve } = require("path");
 function deleteData(path, filePath, readable) {
   const pathArray = path.split(".");
   let obj = load(filePath);
@@ -21,7 +22,7 @@ function deleteData(path, filePath, readable) {
   delete target[lastKey];
 
   try {
-    fs.writeFileSync(filePath, JSON.stringify(obj, null, readable));
+    fs.writeFileSync(resolve(filePath), JSON.stringify(obj, null, readable));
     return target;
   } catch (e) {
     console.error(e.message);

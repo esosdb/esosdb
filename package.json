@@ -1,6 +1,6 @@
 {
   "name": "esosdb",
-  "version": "2.1.4",
+  "version": "3.0.0",
   "description": "You can easily create a database locally",
   "main": "./src/index.js",
   "types": "./src/index.d.ts",
@@ -13,8 +13,7 @@
     "database",
     "esosdb",
     "db",
-    "json",
-    "json database"
+    "json"
   ],
   "author": "Ramco",
   "license": "MIT",

@@ -4,6 +4,159 @@ const { getData } = require("./functions/get");
 const { deleteData } = require("./functions/delete");
 const { normalize, dirname } = require("path");
 const { load } = require("./functions/load");
+const { createData } = require("./functions/Schema/create");
+const { deleteById } = require("./functions/Schema/deleteById");
+const { findByElement } = require("./functions/Schema/findByElement");
+const { updateById } = require("./functions/Schema/updateById");
+
+class DatabaseEvents {
+  constructor() {
+    this.listeners = {};
+  }
+
+  on(eventName, listener) {
+    if (!this.listeners[eventName]) {
+      this.listeners[eventName] = [];
+    }
+    this.listeners[eventName].push(listener);
+  }
+
+  emit(eventName, data) {
+    const eventListeners = this.listeners[eventName];
+    if (eventListeners) {
+      eventListeners.forEach((listener) => listener(data));
+    }
+  }
+
+  off(eventName, listener) {
+    const eventListeners = this.listeners[eventName];
+    if (eventListeners) {
+      this.listeners[eventName] = eventListeners.filter(
+        (existingListener) => existingListener !== listener
+      );
+    }
+  }
+
+  clear() {
+    this.listeners = {};
+  }
+}
+
+class AdvancedDatabase {
+  name;
+  space;
+  constructor(props = { name: String, space: Number }) {
+    this.name = props.name;
+    this.space = props.space;
+    if (!fs.existsSync(`./${this.name}`)) {
+      try {
+        fs.mkdirSync(`./${this.name}`, { recursive: true });
+      } catch (err) {
+        console.error(err);
+      }
+    }
+    return this;
+  }
+}
+
+class CreateSchema extends DatabaseEvents {
+  connected_to;
+  name;
+  props;
+  timestamps;
+  constructor(
+    props = {
+      connect: String,
+      name: String,
+      props: String,
+      timestamps: Boolean,
+    }
+  ) {
+    super();
+    this.connected_to = props.connect;
+    this.name = props.name;
+    this.props = props.props;
+    this.timestamps = props.timestamps;
+    if (!fs.existsSync(`./${this.connected_to.name}/${this.name}s.esos.db`)) {
+      try {
+        fs.writeFileSync(
+          `./${this.connected_to.name}/${this.name}s.esos.db`,
+          "{}",
+          "utf-8"
+        );
+      } catch (e) {
+        console.error(e);
+      }
+
+      setTimeout(() => {
+        this.emit("ready", {
+          type: "ready",
+          status: true,
+          message: `${this.name.toUpperCase()} database is created`,
+        });
+        this.off("ready", () => {});
+      }, 0);
+    } else {
+      setTimeout(() => {
+        this.emit("ready", {
+          type: "ready",
+          status: true,
+          message: `${this.name.toUpperCase()} database is ready`,
+        });
+      }, 0);
+    }
+    return this;
+  }
+
+  create(value, callback = () => {}) {
+    return callback(
+      createData(
+        this.connected_to.name + "/" + this.name,
+        this.props,
+        value,
+        this.connected_to,
+        this.timestamps,
+        this
+      )
+    );
+  }
+
+  deleteById(id, callback = () => {}) {
+    return callback(
+      deleteById(
+        this.connected_to.name + "/" + this.name,
+        id,
+        this.connected_to,
+        this
+      )
+    );
+  }
+
+  findByElement(element, callback = () => {}) {
+    return callback(
+      findByElement(
+        this.connected_to.name + "/" + this.name,
+        element,
+        this.connected_to
+      )
+    );
+  }
+
+  updateById(id, value, callback = () => {}) {
+    return callback(
+      updateById(
+        this.connected_to.name + "/" + this.name,
+        id,
+        this.props,
+        value,
+        this.connected_to,
+        this.timestamps,
+        this
+      )
+    );
+  }
+}
+
 class Database {
   dbPath;
   space;
@@ -70,4 +223,4 @@ class Database {
   }
 }
 
-module.exports = { Database };
+module.exports = { Database, AdvancedDatabase, CreateSchema };

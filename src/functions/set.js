@@ -1,5 +1,6 @@
 const fs = require("fs");
 const { load } = require("./load");
+const { resolve } = require("path");
 function setData(filePath, path, value, readable) {
   let allData = load(filePath);
   let target = allData;
@@ -14,7 +15,7 @@ function setData(filePath, path, value, readable) {
   target[pathArray[pathArray.length - 1]] = value;
 
   try {
-    fs.writeFileSync(filePath, JSON.stringify(allData, null, readable));
+    fs.writeFileSync(resolve(filePath), JSON.stringify(allData, null, readable));
     return target;
   } catch (e) {
     console.error(e);
