@@ -61,7 +61,7 @@ declare class CreateSchema<
   }): any;
   create(
     value: {
-      [key in keyof T]-?: T[key]["required"] extends true
+      [key in keyof T]?: T[key]["required"] extends true
         ? T[key]["type"] extends keyof Types
           ? Types[T[key]["type"]]
           : any
