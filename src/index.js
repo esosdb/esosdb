@@ -156,8 +156,7 @@ class CreateSchema extends DatabaseEvents {
         this.props,
         value,
         this.connected_to,
-        this.timestamps,
-        this
+        this.timestamps
       )
     );
   }

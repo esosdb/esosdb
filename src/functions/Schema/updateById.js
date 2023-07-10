@@ -1,17 +1,12 @@
 const { getData } = require("../get");
 const { setData } = require("../set");
 
-function updateById(name, id, props, value, db, timestamps, fis) {
+function updateById(name, id, props, value, db, timestamps) {
   let valueArr = Object.keys(value);
-  let target = getData(`${name.split("/")[1]}s.${id}`);
+  let target = getData(`${id}`, `./${name}s.esos.db`);
   if (!target)
     return (
-      console.error(`Not found ${name.split("/")[1]} with "${id}"`),
-      fis.emit("error", {
-        type: "error",
-        name: name.split("/")[1],
-        message: `Not found data with this id: ${id}`,
-      })
+      console.error(`Not found ${name.split("/")[1]} with "${id}"`)
     );
   for (let i = 0; i < valueArr.length; i++) {
     if (
@@ -28,7 +23,7 @@ function updateById(name, id, props, value, db, timestamps, fis) {
   if (timestamps) {
     target["updatedAt"] = new Date();
   }
-  return setData(`${name}s.${id}`);
+  return setData(`./${name}s.esos.db`, `${id}`, target, db.space)[id];
 }
 
 module.exports = { updateById };
