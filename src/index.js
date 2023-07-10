@@ -8,7 +8,7 @@ const { createData } = require("./functions/Schema/create");
 const { deleteById } = require("./functions/Schema/deleteById");
 const { findByElement } = require("./functions/Schema/findByElement");
 const { updateById } = require("./functions/Schema/updateById");
-
+const { findById } = require("./functions/Schema/findById");
 class DatabaseEvents {
   constructor() {
     this.listeners = {};
@@ -139,6 +139,12 @@ class CreateSchema extends DatabaseEvents {
         element,
         this.connected_to
       )
+    );
+  }
+
+  findById(id, callback = () => {}) {
+    return callback(
+      findById(this.connected_to.name + "/" + this.name, id, this.connected_to)
     );
   }
 

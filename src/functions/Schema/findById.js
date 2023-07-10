@@ -1,17 +1,10 @@
 const { getData } = require("../get");
 
-function findData(name, id, db, fis) {
+function findById(name, id, db) {
   try {
     return getData(`${name.split("/")[1]}s.${id}`, `./${name}`);
   } catch (e) {
-    return (
-      console.error(e.message),
-      fis.emit("error", {
-        type: "error",
-        name: name.split("/")[1],
-        message: `Not found data with this id : ${id}`,
-      })
-    );
+    return console.error(e.message);
   }
 }
-module.exports = { findData };
+module.exports = { findById };
