@@ -5,7 +5,7 @@ function createData(name, props, value, db, timestamps, fis) {
   let id = "";
   let crtProps = props;
   if (crtProps.id) {
-    id = crtProps.id;
+    id = value.id;
   } else {
     id = generateUniqueId();
   }
