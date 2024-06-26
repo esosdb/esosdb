@@ -1,20 +1,14 @@
 const { deleteData } = require("../delete");
-const { getData } = require("../get");
 const { load } = require("../load");
-const { setData } = require("../set");
 
-function deleteById(name, id, db, fis) {
-  try {
-    let target = load(`./${name}s.esos.db`)[id];
-    if (!target)
-      return {
-        type: "error",
-        message: `Not found data with this id: ${id}`,
-      };
-    return deleteData(`${id}`, `./${name}s.esos.db`, db.space);
-  } catch (e) {
-    console.error(e);
-  }
+function deleteById(name, id, db) {
+    try {
+        let target = load(`./${name}.esos.db`)[id];
+        if (!target) throw new Error(`Not found data with this id: ${id}`);
+        return deleteData(`${id}`, `./${name}.esos.db`, db.space);
+    } catch (e) {
+        throw new Error(e);
+    }
 }
 
 module.exports = { deleteById };

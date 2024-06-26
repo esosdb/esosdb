@@ -4,7 +4,7 @@
 
 You can easily create a database locally.
 
-Do you want more detail? Check [Docs](https://esosdb.mbps.tk/)
+More details in the [Docs](https://esosdb.mbps.tk/)
 
 ## Contents
 
@@ -17,7 +17,6 @@ Do you want more detail? Check [Docs](https://esosdb.mbps.tk/)
   - [getAll()](#getall)
   - [deleteAll()](#deleteall)
 - [Setup advanced Database](#setup-advanced-database)
-  - [ready](#ready)
   - [create()](#create)
   - [deleteById()](#deleteById)
   - [findByElement()](#findByElement)
@@ -59,16 +58,16 @@ const db = new Database({
 ### set
 
 ```js
-db.set("main", {}, (callback) => {
-  console.log(callback); // logs the {main:{}}
+db.set("main", {}, (err,data) => {
+  console.log(data); // logs the {main:{}}
 });
 
-db.set("main.name", "esosdb", (callback) => {
-  console.log(callback); // logs the {name:"esosdb"}
+db.set("main.name", "esosdb", (err,data) => {
+  console.log(data); // logs the {name:"esosdb"}
 });
 
-db.set("main.version", "2.1.0", (callback) => {
-  console.log(callback); // logs the {name:"esosdb",version:"2.1.0"}
+db.set("main.version", "2.1.0", (err,data) => {
+  console.log(data); // logs the {name:"esosdb",version:"2.1.0"}
 });
 ```
 
@@ -81,24 +80,24 @@ console.log(db.get("main.name")); //logs the "esosdb"
 ### delete
 
 ```js
-db.delete("main.version", (callback) => {
-  console.log(callback); // logs the {name:"esosdb"} because version is deleted
+db.delete("main.version", (err,data) => {
+  console.log(data); // logs the {name:"esosdb"} because version is deleted
 });
 ```
 
 ### push
 
 ```js
-db.push("main.dependencies", "fs", (callback) => {
-  console.log(callback); // logs the {name:"esosdb",dependencies:["fs"]}
+db.push("main.dependencies", "fs", (err,data) => {
+  console.log(data); // logs the {name:"esosdb",dependencies:["fs"]}
 });
 ```
 
 ### unpush
 
 ```js
-db.unpush("main.dependencies", "fs", (callback) => {
-  console.log(callback); // logs the {name:"esosdb",dependencies:[]}
+db.unpush("main.dependencies", "fs", (err,data) => {
+  console.log(data); // logs the {name:"esosdb",dependencies:[]}
 });
 ```
 
@@ -111,8 +110,8 @@ console.log(db.getAll()); // logs the {main:{name:"esos"}}
 ### deleteAll
 
 ```js
-db.deleteAll((callback) => {
-  console.log(callback); // logs the {}
+db.deleteAll((err,data) => {
+  console.log(data); // logs the {}
 });
 ```
 
@@ -125,8 +124,13 @@ const { AdvancedDatabase, CreateSchema } = require("esosdb");
 const adb = new AdvancedDatabase({ name: "advanceddb", space: 2 });
 const ExampleSchema = new CreateSchema({
   connect: adb,
-  name: "exapmle",
-  props: { name: { type: "string", required: true } }, //if you don't add any id then id will be generated randomly
+  name: "example",
+  props: { 
+    name: { 
+        type: "string", 
+        required: true,
+    } 
+  }, //if you don't add any id then id will be generated randomly
   timestamps: true,
 });
 ```
@@ -139,24 +143,21 @@ const adb = new AdvancedDatabase({ name: "advanceddb", space: 2 });
 const ExampleSchema = new CreateSchema({
   connect: adb,
   name: "example",
-  props: { name: { type: "string", required: true } }, //if you don't add any id then id will be generated randomly
+  props: { 
+    name: { 
+        type: "string", 
+        required: true,
+    } 
+  }, //if you don't add any id then id will be generated randomly
   timestamps: true,
-});
-```
-
-### ready
-
-```js
-ExampleSchema.on("ready", (data) => {
-  console.log(data);
 });
 ```
 
 ### create
 
 ```js
-ExampleSchema.create({ name: "example" }, (callback) => {
-  console.log(callback);
+ExampleSchema.create({ name: "example" }, (err,data) => {
+  console.log(data);
   /*
    {
       id:"uniqueId",
@@ -171,24 +172,24 @@ ExampleSchema.create({ name: "example" }, (callback) => {
 ### deleteById
 
 ```js
-ExampleSchema.deleteById("id", (callback) => {
-  console.log(callback); //true or error
+ExampleSchema.deleteById("id", (err,data) => {
+  console.log(data); // {}
 });
 ```
 
 ### findByElement
 
 ```js
-ExampleSchema.findByElement({ name: "example" }, (callback) => {
-  console.log(callback); //[...foundDatas]
+ExampleSchema.findByElement({ name: "example" }, (err,data) => {
+  console.log(data); //[...foundDatas]
 });
 ```
 
 ### findById
 
 ```js
-ExampleSchema.findById("uniqueId", (callback) => {
-  console.log(callback);
+ExampleSchema.findById("uniqueId", (err,data) => {
+  console.log(data);
   /*
   {
     name:"Example",
@@ -201,16 +202,14 @@ ExampleSchema.findById("uniqueId", (callback) => {
 ### updateById
 
 ```js
-ExampleSchema.updateById("id", { name: "example in the end" }, (callback) => {
-  console.log(callback);
+ExampleSchema.updateById("id", { name: "example in the end" }, (err,data) => {
+  console.log(data);
   /*
   //changes
   {
     name:"example in the end",
-    updatedAt:"last edited"
+    updatedAt:"last edited time"
   }
   */
 });
 ```
-
-### esosdb

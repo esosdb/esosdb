@@ -1,12 +1,11 @@
-const { getData } = require("../get");
 const { load } = require("../load");
 
-function findByElement(name, element, db) {
+function findByElement(name, element) {
   try {
     var property = Object.keys(element)[0];
     var value = element[property];
     let allData =
-      load(`./${name}s.esos.db`);
+      load(`./${name}.esos.db`);
     let foundData = [];
     Object.keys(allData).forEach((key) => {
       let dataElement = allData[key];
@@ -16,7 +15,7 @@ function findByElement(name, element, db) {
     });
     return foundData;
   } catch (e) {
-    console.log(e.message);
+    throw new Error(e);
   }
 }
 
