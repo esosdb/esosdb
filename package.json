@@ -8,7 +8,7 @@
         "test": "echo \"Error: no test specified\" && exit 1"
     },
     "repository": "git+https://github.com/ramazaneris/esosdb.git",
-    "homepage": "https://esosdb.mbps.tk/",
+    "homepage": "https://esosdb.itsram.co/",
     "keywords": [
         "database",
         "esosdb",

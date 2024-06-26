@@ -4,7 +4,7 @@
 
 You can easily create a database locally.
 
-More details in the [Docs](https://esosdb.mbps.tk/)
+More details in the [Docs](https://esosdb.itsram.co/)
 
 ## Contents
 
