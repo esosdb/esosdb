@@ -135,7 +135,7 @@ declare class CreateSchema<T extends SchemaProps<PropsTypes>> {
         value: {
             [K in keyof SpecificElementType<T>]?: T[K]["type"] extends "object"
                 ? {
-                      [R in keyof T[K]["props"]]: SpecificElementType<
+                      [R in keyof T[K]["props"]]?: SpecificElementType<
                           T[K]["props"]
                       >[R];
                   }
