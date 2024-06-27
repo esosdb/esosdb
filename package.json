@@ -1,9 +1,9 @@
 {
     "name": "esosdb",
-    "version": "3.1.0",
+    "version": "3.1.1",
     "description": "You can easily create a database locally",
     "main": "./src/index.js",
-    "types": "./types/index.d.ts",
+    "types": "./src/index.d.ts",
     "scripts": {
         "test": "echo \"Error: no test specified\" && exit 1"
     },
