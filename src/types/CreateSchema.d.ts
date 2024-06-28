@@ -9,7 +9,6 @@ declare type PropsTypes = {
     "number[]": number[];
     "boolean[]": boolean[];
     "object[]": object[];
-    date: Date;
     any: any;
     "any[]": any[];
 };
