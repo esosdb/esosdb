@@ -44,7 +44,7 @@ class CreateSchema {
                     this.props,
                     data,
                     this.connect,
-                    this.connect.timestamps
+                    this.timestamps
                 )
             );
         } catch (error) {
