@@ -23,7 +23,7 @@ declare type SchemaProps<T extends PropsTypes> = {
     };
 };
 
-declare type PropsInstance<T> =  {
+declare type PropsInstance<T> = {
     [K in keyof T]: T[K]["type"] extends "object"
         ? T[K]["required"] extends true
             ? PropsInstance<T[K]["props"]>
@@ -50,6 +50,17 @@ declare type SpecificElementType<T> = {
 };
 
 declare class CreateSchema<T extends SchemaProps<PropsTypes>> {
+    
+    public Type: {
+        [K in keyof ResponseInstance<T>]: T[K]["type"] extends "object"
+            ? {
+                  [R in keyof T[K]["props"]]: ResponseInstance<
+                      T[K]["props"]
+                  >[R];
+              }
+            : ResponseInstance<T>[K];
+    };
+
     constructor({
         connect,
         name,
