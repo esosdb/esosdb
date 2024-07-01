@@ -1,6 +1,6 @@
 {
     "name": "esosdb",
-    "version": "3.1.31",
+    "version": "3.2.0",
     "description": "You can easily create a database locally",
     "main": "./src/index.js",
     "types": "./src/index.d.ts",
